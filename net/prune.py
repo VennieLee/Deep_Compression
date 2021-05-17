@@ -33,7 +33,7 @@ class PruningModule(Module):
         # Note that module here is the layer
         # ex) fc1, fc2, fc3
         for name, module in self.named_modules():
-            if name in ['fc0', 'fc3', 'fc6']:
+            if name in ['fc.0', 'fc.3', 'fc.6']:
                 module.prune(threshold=percentile_value)
 
     def prune_by_std(self, s=0.25):
@@ -46,7 +46,8 @@ class PruningModule(Module):
         Note : In the paper, the authors used different sensitivity values for different layers.
         """
         for name, module in self.named_modules():
-            if name in ['fc0', 'fc3', 'fc6']:
+            #print(name, "\n\n\n")
+            if name in ['fc.0', 'fc.3', 'fc.6']:
                 threshold = np.std(module.weight.data.cpu().numpy()) * s
                 print(f'Pruning with threshold : {threshold} for layer {name}')
                 module.prune(threshold)
@@ -95,6 +96,7 @@ class MaskedLinear(Module):
             self.bias.data.uniform_(-stdv, stdv)
 
     def forward(self, input):
+        
         return F.linear(input, self.weight * self.mask, self.bias)
 
     def __repr__(self):
