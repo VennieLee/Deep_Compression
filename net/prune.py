@@ -33,7 +33,7 @@ class PruningModule(Module):
         # Note that module here is the layer
         # ex) fc1, fc2, fc3
         for name, module in self.named_modules():
-            if name in ['fc1', 'fc2', 'fc3']:
+            if name in ['fc0', 'fc3', 'fc6']:
                 module.prune(threshold=percentile_value)
 
     def prune_by_std(self, s=0.25):
