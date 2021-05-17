@@ -1,4 +1,6 @@
 # Deep-Compression-PyTorch
-VC_pruning = VGG16 with Cifar10
+NOT COMPLETE!! Not recommended for use.
+
+VC_pruning means 'VGG16 with Cifar10'
 
 Use : python VC_pruning.py
