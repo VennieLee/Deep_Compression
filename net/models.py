@@ -1,6 +1,5 @@
 import torch.nn as nn
 import torch.nn.functional as F
-
 from .prune import PruningModule, MaskedLinear
 
 class LeNet(PruningModule):
@@ -53,10 +52,6 @@ class LeNet_5(PruningModule):
 
         return x
 
-import torch
-import torch.nn as nn 
-from .prune import PruningModule, MaskedLinear
-
 vgg16 = [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 'M', 512, 512, 512, 'M', 512, 512, 512, 'M']
 
 class VGG(PruningModule):
@@ -77,7 +72,9 @@ class VGG(PruningModule):
 
     def forward(self, x):
         x = self.conv(x)
-        x.reshape(x.shape[0], -1)
+        #print(x.shape)
+        x = x.reshape(x.shape[0], -1)
+        #print(x.shape)
         x = self.fc(x)
         return x
 
