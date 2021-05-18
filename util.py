@@ -5,6 +5,7 @@ import numpy as np
 from torch.nn import Parameter
 from torch.nn.modules.module import Module
 import torch.nn.functional as F
+import torchvision
 from torchvision import datasets, transforms
 
 def log(filename, content):
