@@ -38,13 +38,19 @@ def print_nonzeros(model):
 
 def test(model, use_cuda=True):
     kwargs = {'num_workers': 5, 'pin_memory': True} if use_cuda else {}
-    device = torch.device("cuda" if use_cuda else 'cpu')
-    test_loader = torch.utils.data.DataLoader(
-    datasets.MNIST('data', train=False, transform=transforms.Compose([
-                       transforms.ToTensor(),
-                       transforms.Normalize((0.1307,), (0.3081,))
-                   ])),
-    batch_size=1000, shuffle=False, **kwargs)
+    transform = transforms.Compose(
+        [transforms.ToTensor(),
+          transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
+    )
+
+    trainset = torchvision.datasets.CIFAR10(root='data', train=True, download=True, transform=transform)
+    train_loader = torch.utils.data.DataLoader(trainset, batch_size=1000, shuffle=True)
+
+    testset = torchvision.datasets.CIFAR10(root='data', train=False, download=True, transform=transform)
+    test_loader = torch.utils.data.DataLoader(testset, batch_size=1000, shuffle=False)
+
+    classes = ('plane', 'car', 'bird', 'cat', 'deer', 
+               'dog', 'frog', 'horse', 'ship', 'truck')
     model.eval()
     test_loss = 0
     correct = 0
