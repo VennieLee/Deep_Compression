@@ -3,7 +3,7 @@ import os
 
 import torch
 
-from net.models import LeNet
+from net.models import VGG
 from net.quantization import apply_weight_sharing
 import util
 
