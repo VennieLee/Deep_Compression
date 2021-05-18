@@ -113,6 +113,7 @@ def train(epochs):
    #torch.save(net, './save')
 
 def test():
+   model.eval()
    total_correct = 0
    total_images = 0
    confusion_matrix = np.zeros([10,10], int)
