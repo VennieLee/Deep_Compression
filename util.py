@@ -39,6 +39,7 @@ def print_nonzeros(model):
 
 def test(model, use_cuda=True):
     kwargs = {'num_workers': 5, 'pin_memory': True} if use_cuda else {}
+    device = torch.device("cuda" if use_cuda else 'cpu')
     transform = transforms.Compose(
         [transforms.ToTensor(),
           transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
