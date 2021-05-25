@@ -1,5 +1,5 @@
 # Deep-Compression-PyTorch
-NOT COMPLETE!! Not recommended for use.
+IMCOMPLETE!! Not recommended for use.
 
 VC_pruning means 'VGG16 with Cifar10'
 
